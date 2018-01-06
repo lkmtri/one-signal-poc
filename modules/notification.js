@@ -36,7 +36,7 @@ const registerNotification = browserOnly(() => {
 
 export const registerUserEmailToOneSignal = browserOnly((email) => {
   OneSignal.push(function() {
-    OneSignal.syncHashedEmail(email)
+    OneSignal.syncHashedEmail(email).then((done) => done && alert(`Email ${email} is registered to OneSignal.`))
   })
 })
 

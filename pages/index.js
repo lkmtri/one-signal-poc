@@ -1,15 +1,14 @@
-import Page from 'components/Page'
-import InputWithButton from 'components/InputWithButton'
-import { registerUserEmailToOneSignal } from 'tools/notification'
+import { Page } from 'components'
+import withRedux from 'modules/store'
+import { registerUserEmailToOneSignal } from 'modules/notification'
+import { RegisterEmailForm } from 'containers'
+
+const handleRegisterEmailFormSubmit = ({ email }) => registerUserEmailToOneSignal(email)
 
 const Index = () => (
   <Page>
-    <InputWithButton
-      label="Email"
-      onButtonClick={registerUserEmailToOneSignal}
-      buttonString="Register Email To OneSignal"
-    />
+    <RegisterEmailForm onSubmit={handleRegisterEmailFormSubmit} />
   </Page>
 )
 
-export default Index
+export default withRedux(Index)
