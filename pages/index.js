@@ -1,8 +1,14 @@
 import Page from 'components/Page'
+import InputWithButton from 'components/InputWithButton'
+import { registerUserEmailToOneSignal } from 'tools/notification'
 
 const Index = () => (
   <Page>
-    <p>next.js</p>
+    <InputWithButton
+      label="Email"
+      onButtonClick={registerUserEmailToOneSignal}
+      buttonString="Register Email To OneSignal"
+    />
   </Page>
 )
 
