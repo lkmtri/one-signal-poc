@@ -7,10 +7,10 @@ const InputContainer = styled.div`
   position: relative;
   height: 50px;
   margin: 0px auto 8px auto;
-  display: block
+  display: block;
 `
 
-const InputPlaceholder = styled.p`
+const InputPlaceholder = styled.div`
   position: absolute;
   top: 0;
   left: 0;

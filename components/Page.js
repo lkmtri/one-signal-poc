@@ -8,7 +8,7 @@ injectGlobal`
 
   body {
     display: block;
-    margin: 8px;
+    margin: 0px;
   }
 
   p {

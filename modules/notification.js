@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const browserOnly = func => (...params) => {
   if (process.browser && typeof func === 'function') func(...params) 
 }
@@ -38,6 +40,11 @@ export const registerUserEmailToOneSignal = browserOnly((email) => {
   OneSignal.push(function() {
     OneSignal.syncHashedEmail(email).then((done) => done && alert(`Email ${email} is registered to OneSignal.`))
   })
+})
+
+export const sendNotification = browserOnly((data) => {
+  console.log(data)
+  axios.post('/send-notification', data).then(console.log)
 })
 
 export default registerNotification
