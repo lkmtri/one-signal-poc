@@ -14,6 +14,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
+          <link rel="manifest" href="/manifest.json" />
           <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
           {this.props.styleTags}
         </Head>

@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express')
 const next = require('next')
 const bodyParser = require('body-parser')
@@ -44,6 +45,18 @@ app.prepare()
       console.error(error.response)
       res.sendStatus(400)
     })
+  })
+
+  server.get('/manifest.json', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'manifest.json'))
+  })
+
+  server.get('/OneSignalSDKUpdaterWorker.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'OneSignalSDKUpdaterWorker.js'))
+  })
+
+  server.get('/OneSignalSDKWorker.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'OneSignalSDKWorker.js'))
   })
 
   server.get('*', (req, res) => {
