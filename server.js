@@ -16,6 +16,7 @@ app.prepare()
 
   server.post('/send-notification', (req, res) => {
     const { email, heading, content, redirectURL } = req.body
+    console.log(req.body)
     axios({
       method: 'post',
       url: 'https://onesignal.com/api/v1/notifications',
@@ -40,11 +41,18 @@ app.prepare()
         url: redirectURL
       }
     })
-    .then(() => res.sendStatus(201))
+    .then(({ data }) => {
+      console.log(data)
+      res.status(201).json(data)
+    })
     .catch(error => {
       console.error(error.response)
       res.sendStatus(400)
     })
+  })
+
+  server.post('/notification-opened', (req, res) => {
+    res.sendStatus(201)
   })
 
   server.get('/manifest.json', (req, res) => {

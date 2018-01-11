@@ -14,15 +14,16 @@ browserOnly(() => {
 const registerNotification = browserOnly(() => {
   OneSignal.push(function() {
     OneSignal.init({
-      appId: "82228658-8611-4415-8ff8-ccb3dbe3c39f",
+      appId: '82228658-8611-4415-8ff8-ccb3dbe3c39f',
       autoRegister: false,
       welcomeNotification: {
         disable: true,
       },
-      persistNotification: true,
+      persistNotification: false,
       notifyButton: {
         enable: false,
       },
+      "notification.displayed": 'http://localhost:3000/notification-opened'
     })
   })
 
@@ -34,6 +35,12 @@ const registerNotification = browserOnly(() => {
       OneSignal.registerForPushNotifications()
     }
   }])
+
+  OneSignal.push(["addListenerForNotificationOpened", function(data) {
+    console.log("Received NotificationOpened:");
+    console.log(data);
+    axios.post('/notification-opened', data)
+  }]);
 })
 
 export const registerUserEmailToOneSignal = browserOnly((email) => {
@@ -43,8 +50,9 @@ export const registerUserEmailToOneSignal = browserOnly((email) => {
 })
 
 export const sendNotification = browserOnly((data) => {
-  console.log(data)
-  axios.post('/send-notification', data).then(console.log)
+  axios.post('/send-notification', data)
+    .then(({ data }) => alert(`Notification sent.\nNotification ID: ${data.id}\nNo. of recipients:${data.recipients}`))
+    .catch(error => alert('Failed to send notification.'))
 })
 
 export default registerNotification
